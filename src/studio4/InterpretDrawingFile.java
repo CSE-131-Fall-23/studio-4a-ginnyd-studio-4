@@ -19,24 +19,53 @@ public class InterpretDrawingFile {
 		chooser.showOpenDialog(null);
 		File f = new File(chooser.getSelectedFile().getPath());
 		Scanner in = new Scanner(f); //making Scanner with a File
+		// rectangle 255 109 182 true 0.5 0.5 0.2 0.2 
 		
-		String shapeType = in.next(); 
-		int redComponent = in.nextInt();
-		int greenComponent = in.nextInt(); 
-		int blueComponent = in.nextInt();
-		boolean isFilled = in.nextBoolean();
-		double parameterOne = in.nextDouble();
-		double parameterTwo = in.nextDouble();
-		double parameterThree = in.nextDouble();
-		double parameterFour = in.nextDouble();
+	
+		String shape = in.next();
 		
-		String a = "rectangle";
+		if (shape.equals("rectangle")) {
+			int redComponent = in.nextInt();
+			int greenComponent = in.nextInt();
+			int blueComponent = in.nextInt();
+			boolean isFilled = in.nextBoolean();
+			double x = in.nextDouble();
+			double y = in.nextDouble();
+			double halfWidth = in.nextDouble();
+			double halfHeight = in.nextDouble();
+			
+			StdDraw.setPenColor(redComponent, greenComponent, blueComponent);
+			if (isFilled) {
+				StdDraw.filledRectangle(x, y, halfWidth, halfHeight);
+			}
+			else {
+				StdDraw.rectangle(x, y, halfWidth, halfHeight);
+			}
+		}
 		
-		if (shapeType.equals (a))
-		{
-		StdDraw.clear();
-		StdDraw.setPenColor(redComponent, greenComponent, blueComponent);
-		StdDraw.filledRectangle(parameterOne, parameterTwo, parameterThree, parameterFour);
+		if (shape.equals("triangle")) {
+			double[] pointX = new double[3];
+			double[] pointY = new double[3];
+			int redComponent = in.nextInt();
+			int greenComponent = in.nextInt();
+			int blueComponent = in.nextInt();
+			boolean isFilled = in.nextBoolean();
+			
+			pointX[0] = in.nextDouble();
+			pointY[0] = in.nextDouble();
+			pointX[1] = in.nextDouble();
+			pointY[1] = in.nextDouble();
+			pointX[2] = in.nextDouble();
+			pointY[2] = in.nextDouble();
+			StdDraw.setPenColor(redComponent, greenComponent, blueComponent);
+			
+			if (isFilled) {
+				StdDraw.filledPolygon(pointX, pointY);
+			}
+			
+			else {
+				StdDraw.polygon(pointX, pointY);
+			}
 		}
 		
 	}
